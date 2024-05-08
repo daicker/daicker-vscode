@@ -1,0 +1,76 @@
+{
+	"name": "vscode-daicker",
+	"displayName": "Daicker",
+	"description": "Daicker language support for Visual Studio Code",
+  "publisher": "Toru Ikeda",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.70.0"
+	},
+	"categories": [
+		"Programming Languages"
+	],
+  "repository": {
+		"type": "git",
+		"url": "https://github.com/daicker/daicker-vscode-extention.git"
+	},
+	"main": "./dist/extension.js",
+	"activationEvents": [
+		"onLanguage:daicker"
+	],
+	"contributes": {
+		"commands": [
+			{
+				"title": "Restart Language Server",
+				"category": "Daicker",
+				"command": "daicker.restartLanguageServer"
+			}
+		],
+		"languages": [
+			{
+				"id": "daicker",
+				"aliases": [
+					"Daicker",
+					"daicker"
+				],
+				"extensions": [
+					".daic"
+				]
+			}
+		],
+		"configuration": {
+			"type": "object",
+			"title": "vscode-daicker",
+			"properties": {
+				"vscode-daicker.executablePath": {
+					"type": "string",
+					"default": "",
+					"markdownDescription": "Path to `daicker` executable"
+				},
+				"vscode-daicker.daicker.inlayHints": {
+					"type": "boolean",
+					"default": true,
+					"markdownDescription": "Enable inlay hints"
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:publish": "vsce publish",
+		"vscode:prepublish": "npm run package",
+		"vscode:package": "vsce package",
+		"compile": "webpack",
+		"watch": "webpack --watch",
+		"package": "webpack --mode production --devtool hidden-source-map",
+		"pretest": "npm run compile-tests && npm run compile && npm run lint",
+		"test": "node ./out/test/runTest.js"
+	},
+	"dependencies": {
+		"vscode-languageclient": "^8.0.2"
+	},
+	"devDependencies": {
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+		"@vscode/vsce": "^2.21.1"
+	}
+}
